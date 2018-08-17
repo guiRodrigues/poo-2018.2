@@ -67,7 +67,7 @@ struct Sala{
 
         if (exist){
             cout << "   fail: " << nome << " ja esta no cinema" << endl;
-            return true;
+            return false;
         }
         if (cadeiras.at(id).existe == true){
             cout << "   fail: cadeira ja esta ocupada" << endl;
@@ -77,7 +77,7 @@ struct Sala{
             Cliente c(nome, fone);
             cadeiras.at(id) = c;
             cout << "   done" << endl;
-            return false;
+            return true;
         }
         return false;
     }
