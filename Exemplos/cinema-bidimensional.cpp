@@ -32,9 +32,13 @@ struct Cliente{
     //     return ss.str();
     // }
 
-    void toString(){
-        if (existe)
-            cout << this->nome << ":" << this->fone;
+    void toString(int op){
+        if (existe){
+            if (op == 1)
+                cout << this->nome << ":" << this->fone;
+            else
+                cout << "R";
+        }
         else
             cout << "-";
     }
@@ -56,12 +60,12 @@ struct Cinema{
         }
     }
 
-    void show(){
+    void show(int op){
         // Como usar o stringstream aqui?
         for (int i=0; i<sala.size(); i++){
             cout << "   | ";
             for (int j=0; j<sala[i].size(); j++){
-                sala[i][j].toString();
+                sala[i][j].toString(op);
                 cout << " ";
             }
             cout << "|";
@@ -114,7 +118,9 @@ int main(){
             cinema = Cinema(x, y);
             cout << "   sala criada com " << (x*y) << " cadeiras" << endl;
         } else if (op == "show"){
-            cinema.show();
+            int op;
+            cin >> op;
+            cinema.show(op);
         } else if (op == "reservar"){
             string nome, fone;
             cin  >> nome >> fone >> x >> y;
