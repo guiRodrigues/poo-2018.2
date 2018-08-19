@@ -20,7 +20,7 @@ struct Cliente{
     // Métodos
 
     // Construtor
-    Cliente(string nome = "cliente", string fone = "0000", bool existe = true){
+    Cliente(string nome = "", string fone = "", bool existe = true){
         this->existe = existe;
         this->nome = nome;
         this->fone = fone;
@@ -37,11 +37,6 @@ struct Sala{
 
     // Construtor
     Sala(int tamanho){
-        init(tamanho);
-    }
-
-    void init(int tamanho){
-        cadeiras.clear();
         for (int i=0; i<tamanho; i++)
             cadeiras.push_back(Cliente("", "", false));
     }
@@ -60,19 +55,30 @@ struct Sala{
     bool reservar(string nome, string fone, int id){
 
         bool exist;
+        int tam = cadeiras.size();
         for (Cliente c : cadeiras){
             if (c.nome == nome)
                 exist = true;
         }
 
+        // Se ele está no cinema
         if (exist){
             cout << "   fail: " << nome << " ja esta no cinema" << endl;
             return false;
         }
-        if (cadeiras.at(id).existe == true){
+        // Se a cadeira está ocupada
+
+        // else if (cadeiras.at(id).existe == true){
+        else if (cadeiras.at(id).existe){
             cout << "   fail: cadeira ja esta ocupada" << endl;
             return false;
         }
+        // Se o ID for invalido
+        else if ((id < 0) || (id>=tam)){
+            cout << "   fail: id invalido" << endl;
+            return false;
+        }
+        // Se der certo
         else if (cadeiras.at(id).existe == false){
             Cliente c(nome, fone);
             cadeiras.at(id) = c;
@@ -84,6 +90,7 @@ struct Sala{
 
     bool cancelar(string nome){
         int tam = cadeiras.size();
+        // for (int i=0; i< (int) cadeiras.size(); i++){
         for (int i=0; i<tam; i++){
             if (cadeiras.at(i).nome == nome){
                 cadeiras.at(i).existe = false;
@@ -112,7 +119,7 @@ int main(){
         else if (op == "init"){
             int tamanho;
             cin >> tamanho;
-            cinema.init(tamanho);
+            cinema = Sala(tamanho);
             cout << "   done" << endl;
         }
         else if (op == "show"){
@@ -128,6 +135,11 @@ int main(){
             string nome;
             cin >> nome;
             cinema.cancelar(nome);
+        }
+        else {
+            string invalido;
+            getline(cin, invalido);
+            cout << "   fail: comando invalido" << endl;
         }
     }
 
