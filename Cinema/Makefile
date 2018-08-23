@@ -7,3 +7,6 @@ cinema:
 bidimensional:
 	g++ -Wall bidimensional.cpp -o bidimensional
 	./bidimensional
+cinemaPonteiros:
+	g++ -Wall cinemaPonteiros.cpp -o cinemaPonteiros
+	./cinemaPonteiros
