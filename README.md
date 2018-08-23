@@ -1,9 +1,9 @@
 # POO 2018.2
 
-#### Guiherme Santos Rodrigues, 414941
-Repositório destinado às atividades da disciplina de POO
 <img class="avatar rounded-2" src="https://avatars1.githubusercontent.com/u/38701384?s=400&amp;u=e41bebc98d26b89e023a1aa3b29516b9fca940c8&amp;v=4" width="200" height="200" alt="@guiRodrigues">
 
+#### Guiherme Santos Rodrigues, 414941
+Repositório destinado às atividades da disciplina de POO
 
 ## Carro
 - Código do carro baseado no exercício da calculadora desenvolvido em sala;
