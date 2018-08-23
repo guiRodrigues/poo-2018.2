@@ -1,5 +1,5 @@
 # POO 2018.2
-![Guilherme Santos Rodrigues](https://avatars1.githubusercontent.com/u/38701384?s=400&u=e41bebc98d26b89e023a1aa3b29516b9fca940c8&v=4 =200)
+![Guilherme Santos Rodrigues](https://avatars1.githubusercontent.com/u/38701384?s=400&u=e41bebc98d26b89e023a1aa3b29516b9fca940c8&v=4 | width=100)
 #### Guiherme Santos Rodrigues, 414941
 Repositório destinado às atividades da disciplina de POO
 
