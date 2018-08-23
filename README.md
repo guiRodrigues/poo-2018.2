@@ -19,4 +19,4 @@ Repositório destinado às atividades da disciplina de POO
 - O projeto do cinema foi desenvolvido em dupla, Elienai e Guilherme Santos;
 - A dificuldade que esteve presente no desenvolvimento do projeto foi a utilização da biblioteca vector para criar uma lista de clientes que ocupam uma sala de cinema. Desse modo, o que pode ser aprendido nesse projeto foi a fixação de conceitos de utilização de contrutores, atributos, métodos, instanciação e a utlização de conceitos básicos da biblioteca vector. Entretato, com o desafio proposto em sala, descobri que meu conhecimento sobre ponteiros é pífio, obtive muitas dificuldades na utilização de ponteiros, principalmente quando o relaciono com objetos e vetores desses objetos;
 - As dúvidas pertinentes após a execução do projeto foram a utilização da biblioteca vector, e a utilização de ponteiros;
-- Para o desenvolvimento do projeto foram levadas cerca de 1 hora;
+- Para o desenvolvimento do projeto demorei cerca de uma hora;
