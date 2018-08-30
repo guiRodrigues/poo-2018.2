@@ -98,6 +98,12 @@ struct Topic {
 
     bool in(Person *person) {
         int aux = 0;
+	for (Person * p : passengers){
+		if (p!=nullptr && p->name == person->name){
+			cout << "	fail: " << person->name << " já está na Topic" << endl; 
+			return false;		
+		}
+	}
         if (person->age > 60) {
             for (int i = 0; i < size; i++) {
                 if (passengers[i] == nullptr) {
@@ -128,7 +134,7 @@ struct Topic {
 
     bool out(string name) {
         for (int i = 0; i < size; i++) {
-            if (passengers[i]->name == name) {
+            if (passengers[i] != nullptr && passengers[i]->name == name) {
                 passengers[i] = nullptr;
                 cout << "   done" << endl;
                 return true;
