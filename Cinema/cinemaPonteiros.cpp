@@ -102,8 +102,8 @@ struct Sala{
         for (int i=0; i<tam; i++){
             if (cadeiras.at(i)->nome == nome){
                 cadeiras.at(i) = nullptr;
-                cout << "   done" << endl;
                 return true;
+                cout << "   done" << endl;
             }
         }
         cout << "   fail: " << nome << " nao esta na sala" << endl;
