@@ -3,7 +3,7 @@
 TODO:
     ~ Qual a diferença em usar class e struct?
 
-    ~ Falar para o David Sena passar iteradores
+    ~ Falar para o David Sena sobre iteradores
     ~ Aplicar as "visualizações": private & public
     ~ Retirar a "responsabilidade" do passageiro em saber se é preferencial
     ~ Substituir o size da topic pelo passengers.size()
