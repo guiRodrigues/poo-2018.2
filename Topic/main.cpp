@@ -80,7 +80,8 @@ struct Topic{
         // Não consegui pegar um índice de person!
         int iterator = 0;
         for (Person * person : passengers){
-            flow << ((person == nullptr) ? ((iterator<pref) ? " @" : " =") : person->toString());
+            // flow << ((person == nullptr) ? ((iterator<pref) ? " @" : " =") : person->toString());
+            flow << ((person != nullptr) ? ((iterator<pref) ? " @" + person->toString() : " =" + person->toString()) : ((iterator<pref) ? " @" : " ="));
             iterator++;
         }
         flow << " ]";
