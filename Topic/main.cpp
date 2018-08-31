@@ -1,7 +1,7 @@
 /*
 
 TODO:
-    ~ Implementar class, private e public
+    ~ Qual a diferença em usar class e struct?
 
     ~ Falar para o David Sena passar iteradores
     ~ Aplicar as "visualizações": private & public
@@ -35,7 +35,6 @@ TODO:
 using namespace std;
 
 struct Person{
-
     // Attributes
     string name;
     int age;
@@ -55,12 +54,16 @@ struct Person{
 
 };
 
-struct Topic{
+#if 0
+    This is a comment
+#endif
 
+class Topic{
+private:
     // Attributes
     vector<Person*> passengers;
     int pref;
-
+public:
     // Methods
     // Constructor
     Topic(int size = 0, int pref = 0):
@@ -107,8 +110,7 @@ struct Topic{
         for (unsigned int i=pref; i<passengers.size(); i++)
             if (passengers[i] == nullptr)
                 return i;
-        findPref();
-        return -1;
+        return findPref();
     }
 
     bool in(string name = "", int age = 0){
@@ -136,7 +138,7 @@ struct Topic{
     bool out(string name = ""){
         int pos = find(name);
         if (pos == -1){
-            cout << "HU3" << endl;
+            cout << "   fail: " << name << " não pode sair pois não está no veículo!" << endl;
             return false;
         }
         delete passengers[pos];
@@ -146,10 +148,11 @@ struct Topic{
 
 };
 
-struct Controller{
-
+class Controller{
+private:
     Topic topic;
 
+public:
     string shell(string line){
         stringstream in(line), out;
         string op;
@@ -160,7 +163,7 @@ struct Controller{
             int size = 0, pref = 0;
             in >> size >> pref; // PQ que quando uso o cin >>  fica em loop infinito?
             topic = Topic(size, pref);
-            out << "    done" << endl;
+            out << "   done" << endl;
         } else if (op == "show"){
             cout << topic.toString();
         }else if (op == "in"){
@@ -168,12 +171,12 @@ struct Controller{
             int age = 0;
             in >> name >> age;
             if (topic.in(name, age))
-                out << "    done" << endl;
+                out << "   done" << endl;
         } else if (op == "out"){
             string name;
             in >> name;
             if (topic.out(name))
-                out << "    done" << endl;
+                out << "   done" << endl;
         }
         return out.str();
     }
@@ -184,6 +187,7 @@ struct Controller{
             getline(cin, line);
             if (line == "end")
                 break;
+            cout << line << endl; // Para quando usar um .txt como input, o comando reaparecer
             cout << "   " << shell(line) << endl;
         }
     }

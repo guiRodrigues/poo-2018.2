@@ -1,0 +1,14 @@
+new 7 3
+show
+in Cobblepot 62
+in Riddler 32
+in Freeze 45
+in Bane 42
+in Scarecrow 70
+in Joker 35
+show
+out Bane
+show
+in Two-Face 33
+show
+end
