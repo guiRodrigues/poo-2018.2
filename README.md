@@ -1,6 +1,6 @@
 # POO 2018.2
 
-<img class="avatar rounded-2" src="https://avatars1.githubusercontent.com/u/38701384?s=400&amp;u=e41bebc98d26b89e023a1aa3b29516b9fca940c8&amp;v=4" width="200" height="200" alt="@guiRodrigues">
+<img class="avatar rounded-2" src="https://scontent.fjdo1-1.fna.fbcdn.net/v/t1.0-9/40769452_1945023295798518_8410362610649661440_n.jpg?_nc_cat=0&oh=ecb07ecf4be93ba53487ed40e95d7ef5&oe=5C29D8E4" width="200" height="200" alt="@guiRodrigues">
 
 #### Guiherme Santos Rodrigues, 414941
 Repositório destinado às atividades da disciplina de POO
