@@ -1,6 +1,6 @@
 # POO 2018.2
 
-<img class="avatar rounded-2" src="https://avatars1.githubusercontent.com/u/38701384?s=400&amp;u=e41bebc98d26b89e023a1aa3b29516b9fca940c8&amp;v=4" width="200" height="200" alt="@guiRodrigues">
+<img class="avatar rounded-2" src="https://scontent.fjdo1-1.fna.fbcdn.net/v/t1.0-9/40769452_1945023295798518_8410362610649661440_n.jpg?_nc_cat=0&oh=ecb07ecf4be93ba53487ed40e95d7ef5&oe=5C29D8E4" width="200" height="200" alt="@guiRodrigues">
 
 #### Guiherme Santos Rodrigues, 414941
 Repositório destinado às atividades da disciplina de POO
@@ -22,7 +22,7 @@ Repositório destinado às atividades da disciplina de POO
 - Para o desenvolvimento do projeto demorei cerca de uma hora;
 
 ## [Topic](https://github.com/guiRodrigues/poo-2018.2/tree/master/Topic)
-- Desenvolvi um sistema para o gerenciamento de passageiros em um veículo compartilhado. As funções compreendidas no projeto proposto, como a criação do veículo, a entrada de passageiros e suas respectivas saídas foram criadas;
+- Desenvolvi um sistema para o gerenciamento de passageiros em um veículo compartilhado. As funções compreendidas no projeto proposto, como a criação do veículo, as entradas de passageiros e suas respectivas saídas foram criadas. Além disso, com uma pequena alteração, recriei a realidade enfrentada por nós alunos, o [ônibus da UFC](https://github.com/guiRodrigues/poo-2018.2/blob/master/Topic/ufc.cpp), onde mesmo tendo previamente definido a quantidade de lugares, sempre cabe mais um, dois, três...
 - O projeto foi desenvolvido de forma individual;
 - Com o decorrer do projeto, as dificuldades presentes foram algumas dos projetos passados, como a utilização de ponteiros e algumas questões de lógica, além disso, tive constantes dificuldades em relacionar algumas técnicas passadas em sala, como a utilização de um _Controller_, a utilização de biblioteca ```<sstream>``` e algumas dicas que foram passadas em sala, como dar `new` e o `delete` no mesmo escopo, utilização de operadores ternários, algumas dúvidas recorrentes com lista de inicialização, entre outras.
 - As dúvidas pertinentes na realização desse projeto foram a utilização de ponteiros, desde dos construtores até os destrutores, algumas dúvidas na utilização de um Controller para organizar o projeto, lista de inicialização, entre outras dúvidas;
