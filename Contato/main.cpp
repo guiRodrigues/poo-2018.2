@@ -10,8 +10,8 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <iomanip>
-#include <cctype>
+// #include <iomanip>
+// #include <cctype>
 using namespace std;
 
 class Fone{
