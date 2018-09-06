@@ -1,0 +1,15 @@
+show
+init Guilherme
+add oi 88
+add tim 99
+add tim 98
+add vivo 89
+add hello 12
+show
+rm -l oi
+show
+rm -i 1
+show
+update Guilherme vivo:1234 home:4321 work:4444 vivo:1235
+show
+end
