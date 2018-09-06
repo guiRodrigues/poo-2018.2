@@ -27,3 +27,10 @@ Repositório destinado às atividades da disciplina de POO
 - Com o decorrer do projeto, as dificuldades presentes foram algumas dos projetos passados, como a utilização de ponteiros e algumas questões de lógica, além disso, tive constantes dificuldades em relacionar algumas técnicas passadas em sala, como a utilização de um _Controller_, a utilização de biblioteca ```<sstream>``` e algumas dicas que foram passadas em sala, como dar `new` e o `delete` no mesmo escopo, utilização de operadores ternários, algumas dúvidas recorrentes com lista de inicialização, entre outras.
 - As dúvidas pertinentes na realização desse projeto foram a utilização de ponteiros, desde dos construtores até os destrutores, algumas dúvidas na utilização de um Controller para organizar o projeto, lista de inicialização, entre outras dúvidas;
 - Para o desenvolvimento do projeto demorei cera de três horas, por conta da refatoração do projeto devido às dicas dadas em sala;
+
+## [Contato](https://github.com/guiRodrigues/poo-2018.2/tree/master/Contato)
+- Como apresentado no contexto do projeto, desenvolvi uma lista telefônica com funções básicas de criar uma pessoa e atribuir _n_ contatos a ela `(operadora:numero)`.
+- Da mesma forma do projeto anteriror, o projeto foi desenvolvido individualmente.
+- No decorrer do projeto me deparei com dificuldades cuja resolução eram simples, por exemplo no _controller_ eu estava utilizando o _cin_ para pegar os atributos de determinado comando, quando na realidade deveria ser utilizado o fluxo denominado _in_. Além disso, algumas dúvidas recorrentes relacionadas à lógica, problemas com o trabalho de strings, problemas com a contrução do _controller_ além de algumas dúvidas com fluxos.
+- Depois da realização do projeto, algumas dúvidas mantiveram-se, como o o trabalho com strings (`char[]`) em C++, fluxos e a contrução da forma com que os códigos são estão sendo construídos na disciplina.
+- Para a elaboração e desenvolvimento, com os gargalos encontrados, levei cerca de 3hrs e 30min.
