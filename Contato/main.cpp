@@ -14,7 +14,8 @@
 #include <cctype>
 using namespace std;
 
-struct Fone{
+class Fone{
+public:
     string operadora, numero;
 
     Fone(string operadora, string numero){
@@ -29,10 +30,12 @@ struct Fone{
     }
 };
 
-struct Contato{
+class Contato{
+private:
     string nome;
     vector<Fone> lista;
 
+public:
     Contato(string nome = "vazio"):
         nome(nome)
     {}
@@ -51,34 +54,27 @@ struct Contato{
         return flow.str();
     }
 
-    // bool valido(string fone){
-    //     char aux = '*';
-    //     int i = 0;
-    //     while (aux != '\0'){
-    //         aux = fone[i];
-    //         if (!isdigit(aux) || aux != '(' || aux != ')')
-    //             return false;
-    //         i++;
-    //     }
-    //     return true;
-    // }
+    bool val(string s){
+        for (int i=0; i<(int)s.size(); i++){
+            if(!isdigit(s[i]) && s[i] != '(' && s[i] != ')')
+                return false;
+        }
+        return true;
+    }
 
     bool add(Fone fone){
-        stringstream flow;
         for (Fone f : lista)
             if (f.numero == fone.numero){
-                flow << "   fail: ID's repitidos não são aceitos;" << endl;
+                cout << "   fail: ID's repitidos não são aceitos;" << endl;
                 return false;
             }
-        // if (!valido(fone.numero)){
-        //     flow << "   fail: Fone inválido" << endl;
-        //     return false;
-        // } else {
-        //     lista.push_back(fone);
-        //     return true;
-        // }
-        lista.push_back(fone);
-        return true;
+        if (!val(fone.numero)){
+            cout << "   fail: Fone inválido" << endl;
+            return false;
+        } else {
+            lista.push_back(fone);
+            return true;
+        }
     }
 
     // bool rm(string numero){
@@ -113,7 +109,11 @@ struct Contato{
                 string operadora, numero;
                 getline(ss, operadora, ':');
                 getline(ss, numero);
-                lista.push_back(Fone(operadora, numero));
+                if (val(numero))
+                    lista.push_back(Fone(operadora, numero));
+                else{
+                    cout << "   fail: o numero da " << operadora << " não é valido";
+                }
             }
         } else{
             cout << "   fail: update invalido" << endl;
