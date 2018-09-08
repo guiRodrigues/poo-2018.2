@@ -1,0 +1,47 @@
+
+$ new Guilherme
+~ done
+
+$ show
+~ Guilherme => { }
+
+$ add vivo 9898989898
+~ done
+
+$ add oi 989905177
+~ done
+
+$ show
+~ Guilherme => { [0:vivo:9898989898] [1:oi:989905177] }
+
+$ add tim 999899635
+~ done
+
+$ add claro 741258966
+~ done
+
+$ add vivo 632541777
+~ done
+
+$ show
+~ Guilherme => { [0:vivo:9898989898] [1:oi:989905177] [2:tim:999899635] [3:claro:741258966] [4:vivo:632541777] }
+
+$ rm -i 1
+~ done
+
+$ show
+~ Guilherme => { [0:vivo:9898989898] [1:tim:999899635] [2:claro:741258966] [3:vivo:632541777] }
+
+$ rm -l vivo
+~ done
+
+$ show
+~ Guilherme => { [0:tim:999899635] [1:claro:741258966] }
+
+$ update mary vivo:1234 home:4321a work:4444 vivo:1235
+~ WARNING: o contato home:4321a é inválido e não será inserido
+done
+
+$ show
+~ mary => { [0:vivo:1234] [1:work:4444] [2:vivo:1235] }
+

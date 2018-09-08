@@ -1,185 +1,190 @@
-#if 0
-
-    TODO:
-        ~ Aplicar ponteiros
-        ~ Problemas com o unsigned int
-        ~ 
-
-#endif
-
 #include <iostream>
-#include <sstream>
 #include <vector>
-// #include <iomanip>
-// #include <cctype>
+#include <sstream>
 using namespace std;
 
-class Fone{
-public:
-    string operadora, numero;
-
-    Fone(string operadora, string numero){
-        this->operadora = operadora;
-        this->numero = numero;
-    }
-
-    string toString(){
-        stringstream flow;
-        flow << operadora << ":" << numero;
-        return flow.str();
-    }
-};
-
 class Contato{
-private:
-    string nome;
-    vector<Fone> lista;
+private: //implícito
+    // Atributos da classe/objeto
+    string operadora, fone;
 
 public:
-    Contato(string nome = "vazio"):
-        nome(nome)
+    // Construtor
+    Contato(string operadora = "", string fone = ""):
+        operadora(operadora),
+        fone(fone)
     {}
 
-    // ~Contato(){
-    //     for (Fone fone : lista)
-    //         delete(fone);
-    // }
+    // Creating getters and setters (Métodos acessores e modificadores)
+    // GETTERS
+    string getOperadora(){ return this->operadora; }
+    string getFone(){ return this->fone; }
+    // SETTERS
+    void setOperadora(string operadora){ this->operadora = operadora; }
+    void setFone(string fone){ this->fone = fone; }
 
+    // Outros métodos
     string toString(){
         stringstream flow;
-        flow << nome << "=>";
-        // for (Fone f : lista) ~ Como pegar o índice em um For Each?
-        for (unsigned int i=0; i<lista.size(); i++)
-            flow << " [" << i << ":" << lista[i].toString() << "]";
+        flow << getOperadora() << ":" << getFone();
         return flow.str();
     }
 
-    bool val(string s){
-        for (int i=0; i<(int)s.size(); i++){
-            if(!isdigit(s[i]) && s[i] != '(' && s[i] != ')')
-                return false;
+};
+
+class Pessoa{
+private:
+    // Atributos
+    string nome;
+    vector<Contato> lista;
+
+public:
+    // Construtor
+    Pessoa(string nome = ""):
+      nome(nome)
+    {}
+    // Getters and Setters methods (Métodos acessores e modificadores)
+    string geTNome(){ return this->nome; }
+    string getLista(){
+        stringstream flow;
+        int i = 0;
+        for (Contato contato : lista) {
+          flow << " [" << i << ":" << contato.toString() << "]";
+          i++;
         }
-        return true;
+        return flow.str();
+    }
+    void setNome(string nome) { this->nome = nome; }
+
+    // Outros Métodos
+    bool validate(string fone){
+      for (size_t i = 0; i < fone.length(); i++)
+        if (!isdigit(fone[i]) && fone[i]!='(' && fone[i]!=')' && fone[i]!='.')
+          return false;
+      return true;
     }
 
-    bool add(Fone fone){
-        for (Fone f : lista)
-            if (f.numero == fone.numero){
-                cout << "   fail: ID's repitidos não são aceitos;" << endl;
-                return false;
-            }
-        if (!val(fone.numero)){
-            cout << "   fail: Fone inválido" << endl;
-            return false;
-        } else {
-            lista.push_back(fone);
-            return true;
+    bool add(Contato novoContato){
+      for (Contato contato : lista)
+        if (contato.getFone() == novoContato.getFone()){
+          cout << "FAIL: fones repetidos não são aceitos!" << endl;
+          return false;
         }
+      if (!validate(novoContato.getFone())){
+        cout << "FAIL: o número inserido não é válido" << endl;
+        return false;
+      }
+      lista.push_back(novoContato);
+      return true;
     }
 
-    // bool rm(string numero){
-    //     for (int i=0; i<(int)lista.size(); i++)
-    //         if (lista[i].numero == numero){
-    //             lista.erase(lista.begin() + i);
-    //             return true;
-    //         }
-    //     return false;
-    // }
-
-    void rmL(string foneId){
-        for(int i = 0; i < (int) lista.size(); i++)
-            if(lista[i].operadora == foneId){
-                lista.erase(lista.begin() + i);
-            }
-    }
-
-    void rmI(int i){
+    bool removeIndex(int i){
+      if (i>=0 && i<(int)lista.size()){
         lista.erase(lista.begin() + i);
+        cout << "done" << endl;
+        return true;
+      }
+      cout << "FAIL: índice não reconhecido" << endl;
+      return false;
+    }
+
+    bool removeLabel(string label){
+      int aux = 0;
+      for (size_t i=0; i<lista.size(); i++){
+        if (lista[i].getOperadora() == label)
+        lista.erase(lista.begin() + i);
+        aux++;
+      }
+      if (aux>0){
+        cout << "done" << endl;
+        return true;
+      }
+      cout << "FAIL: nehuma operadora com o nome " << label << " foi encontrada" << endl;
+      return false;
     }
 
     void update(string line){
-        stringstream flow(line);
-        string word;
-
-        flow >> word;
-        if (word == nome){
-            lista.clear();
-            while (flow >> word){
-                stringstream ss(word);
-                string operadora, numero;
-                getline(ss, operadora, ':');
-                getline(ss, numero);
-                if (val(numero))
-                    lista.push_back(Fone(operadora, numero));
-                else{
-                    cout << "   fail: o numero da " << operadora << " não é valido";
-                }
-            }
-        } else{
-            cout << "   fail: update invalido" << endl;
-        }
+      stringstream flow(line);
+      string word;
+      flow >> word;
+      setNome(word);
+      lista.clear();
+      while (flow >> word){
+        stringstream ss(word);
+        string operadora, fone;
+        getline(ss, operadora, ':');
+        getline(ss, fone);
+        if (validate(fone))
+          lista.push_back(Contato(operadora, fone));
+        else
+          cout << "WARNING: o contato " << operadora << ":" << fone << " é inválido e não será inserido" << endl;
+      }
     }
-
 };
 
-struct Controller{
+class Controller{
+private:
+  Pessoa pessoa;
 
-    Contato contato;
-
-    string shell(string line){
-        stringstream in(line), out;
-        string op;
-        in >> op;
-        if (op == "help")
-            out << "SHOW!!!";
-        else if (op == "init"){
-            string nome = "";
-            in >> nome;
-            contato = Contato(nome);
-            out << "   done" << endl;
-        } else if (op == "show"){
-            out << contato.toString() << endl;
-        } else if (op == "add"){
-            string nome, numero;
-            in >> nome >> numero;
-            contato.add(Fone(nome, numero));
-        } else if (op == "rm"){
-            string sop; // Second Operation
-            in >> sop;
-            if (sop == "-l"){ // i == indice
-                string label;
-                in >> label;
-                contato.rmL(label);
-            } else if (sop == "-i"){ // l == label
-                int i;
-                in >> i;
-                contato.rmI(i);
-            }
-        } else if (op == "update"){
-            string line;
-            getline(in, line);
-            contato.update(line);
-        }
-        return out.str();
+public:
+  string shell(string line){
+    stringstream in(line), out;
+    string op;
+    in >> op;
+    if (op == "help")
+      out << "new _nome_; show;" << endl;
+    else if (op == "new"){
+      string nome;
+      in >> nome;
+      pessoa = Pessoa(nome);
+      out << "done" << endl;
+    } else if (op == "show"){
+      out << pessoa.geTNome() << " => {" << pessoa.getLista() << " }" << endl;
+    } else if (op == "add"){
+      string nome, fone;
+      in >> nome >> fone;
+      pessoa.add(Contato(nome, fone));
+      cout << "done" << endl;
+    } else if (op == "rm"){
+      string opOp;
+      in >> opOp;
+      if (opOp == "-i"){
+        int index = 0;
+        in >> index;
+        pessoa.removeIndex(index);
+      } else if (opOp == "-l"){
+        string label;
+        in >> label;
+        pessoa.removeLabel(label);
+      } else
+        out << "FAIL: comando não reconhecido" << endl;
+    } else if (op == "update"){
+      string line;
+      getline(in, line);
+      pessoa.update(line);
+      out << "done" << endl;
     }
+    return out.str();
+  }
 
-    void exe(){
-        string line;
-        while (true){
-            getline(cin, line);
-            if (line == "end")
-                return;
-            cout << line << endl;
-            cout << "   " << shell(line) << endl;
-        }
+  void exec(){
+    cout << endl; //Questão estética!!!
+    string line;
+    while (true){
+      getline(cin, line);
+      if (line == "end")
+        return;
+      cout << "$ " << line << endl;
+      cout << "~ " << shell(line) << endl;
     }
+  }
 
 };
 
 int main(){
 
-    Controller controller;
-    controller.exe();
+  Controller controller;
+  controller.exec();
 
     return 0;
 }

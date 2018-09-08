@@ -1,0 +1,16 @@
+new Guilherme
+show
+add vivo 9898989898
+add oi 989905177
+show
+add tim 999899635
+add claro 741258966
+add vivo 632541777
+show
+rm -i 1
+show
+rm -l vivo
+show
+update mary vivo:1234 home:4321a work:4444 vivo:1235
+show
+end
