@@ -4,9 +4,6 @@
 #include <iomanip>
 using namespace std;
 
-enum Creditar{ deposito, estorno };
-enum Debitar{ saque, tarifa };
-
 class Operacao{
 private:
     string descricao;
@@ -58,78 +55,69 @@ public:
     }
 
     // Outros métodos
+
     void pushOperation(string descricao, float valor, float saldo){
         operacoes.push_back(Operacao(descricao, valor, saldo));
     }
+
     string toString(){
         stringstream flow;
         flow << "conta:" << this->getNumero() << " saldo: " << this->getSaldo();
         return flow.str();
     }
+
     string extrato(size_t num = 0){
         stringstream flow;
         int index = (num > 0 && num < operacoes.size()) ? operacoes.size()-num : 0;
         for (size_t i = index; i<operacoes.size(); i++){
-            flow << i 
+            flow << i
             << ": " << setw(10) << operacoes[i].getDescricao()
-            << ": " << setw(5) << operacoes[i].getValor() 
-            << ": " << setw(5) << operacoes[i].getSaldo() 
+            << ": " << setw(5) << operacoes[i].getValor()
+            << ": " << setw(5) << operacoes[i].getSaldo()
             << endl;
         }
         return flow.str();
     }
-    bool creditar(int op, float valor){
-        switch (op){
-            case 0: // deposito
-                if (valor > 0){
-                    setSaldo(getSaldo() + valor);
-                    pushOperation("deposito", valor, getSaldo());
-                    return true;
-                }
-            case 1: // estorno
-                if (valor > 0){
-                    setSaldo(getSaldo() + valor);
-                    pushOperation("estorno", valor, getSaldo());
-                    return true;
-                }
-            default:
-                return false;
-        }
-    }
-    bool debitar(int op, float valor){
-        switch (op){
-            case 0: // saque
-                if (getSaldo() >= valor){
-                    setSaldo(getSaldo() - valor);
-                    pushOperation("saque", valor*(-1), getSaldo());
-                    return true;
-                }
-            case 1: // tarifa
-                if (getSaldo() >= valor){
-                    setSaldo(getSaldo() - valor);
-                    pushOperation("tarifa", valor*(-1), getSaldo());
-                    return true;
-                }
-            default:
-                return false;
-        }
-    }
-    void extornar(string line){
-        stringstream flow(line), out;
-        unsigned int index;
-        while (flow >> index){
-            flow >> index;
-            if (index<0 || index>=operacoes.size())
-                out << "failure: indice invalido";
-            else if (operacoes[index].getDescricao() != "tarifa")
-                out << "failure: indice nao e tarifa";
-            else{
-                float valor = operacoes[index].getValor() * (-1);
-                creditar(Creditar::estorno, valor);
-                pushOperation("estorno", valor, getSaldo());
+
+    bool creditar(string op, float valor){
+        if (op == "deposito" || op == "estorno"){
+            if (valor > 0){
+                setSaldo(getSaldo() + valor);
+                pushOperation(op, valor, getSaldo());
+                return true;
             }
         }
+        return false;
     }
+
+    bool debitar(string op, float valor){
+        if (op == "tarifa" || op == "saque"){
+            if (valor > 0){
+                setSaldo(getSaldo() - valor);
+                pushOperation(op, valor, getSaldo());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    string extornar(int index){
+        stringstream out;
+        if (index>=0 && index<operacoes.size()){
+            float valor = operacoes[index].getValor() * (-1);
+            creditar("estorno", valor);
+            pushOperation("estorno", valor, getSaldo());
+            out << "success: indice " << index << " extornado";
+        }
+        else if (operacoes[index].getDescricao() != "tarifa"){
+            out << "failure: indice " << index << " nao e tarifa";
+        }
+        else{
+            out << "failure: indice invalido";   
+        }
+        return out.str();
+    }
+
 };
 
 class Controller{
@@ -162,7 +150,7 @@ public:
             float valor;
             in >> valor;
             // out << (conta.deposito(Creditar::deposito, valor)) ? "success" : "failure: valor invalido"; ~ second/third operand of conditional expression has no effect
-            if (conta.creditar(Creditar::deposito, valor))
+            if (conta.creditar("deposito", valor))
                 out << "success";
             else
                 out << "failure: valor invalido";
@@ -170,15 +158,15 @@ public:
         else if (op == "saque" || op == "tarifa"){
             float valor;
             in >> valor;
-            if (op == "saque"){
-                if (conta.debitar(Debitar::saque, valor))
-                    out << "success";
-            }
+            if (conta.debitar(op, valor));
             else 
                 out << "failure: valor invalido";
         }
         else if (op == "estorno"){
-            
+            int index;
+            while (in >> index){
+                out << conta.extornar(index) << endl;
+            }
         }
         return out.str();
     }

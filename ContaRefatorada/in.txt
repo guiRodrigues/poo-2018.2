@@ -14,6 +14,7 @@ tarifa 1
 show
 extrato
 extrato 2
-estorno 1 5 7 50
+estorno 1 5 4 3 7 50
+extrato
 show
 end

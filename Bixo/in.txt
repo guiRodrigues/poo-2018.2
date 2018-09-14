@@ -1,0 +1,7 @@
+init 10 3 10
+play
+play
+play
+play
+show
+end
