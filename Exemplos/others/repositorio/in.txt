@@ -1,0 +1,11 @@
+addAlu 0023 ES rui almeida
+addAlu 0021 RC bia barbosa
+addAlu 0024 EC eva galdino
+addAlu 0020 SI may parkerr
+addPro 1323 Doutorado david sena
+addPro 1312 Doutorado elvis caio
+addPro 1542 Mestrado josue luno
+addPro 2542 Mestrado almir bico
+getAlu 0020
+getPro 1312
+end
