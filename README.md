@@ -47,3 +47,9 @@ Repositório destinado às atividades da disciplina de POO
 - O projeto foi desenvolvido individualmente;
 - As principais dificuldades que tive no projeto foram: encontrar uma estrutura que compreendesse o projeto (relacionar as classes Conta e Operacao); no início tive muitas dificuldades em desenvolver as operações básicas do sistema, o [código antigo](https://github.com/guiRodrigues/poo-2018.2/blob/master/Conta/main.cpp) estava muito redundante, eu estava usando enum para realizar as operações e estava muito bagunçado, então decidi refatorar ele; também tive muitas dificuldades na lógica do método estornar, mas foi concluído;
 - Levei cerca de 5 horas com o projeto e a refatoração dele;
+
+## [Repositório I](https://github.com/guiRodrigues/poo-2018.2/tree/master/Repositorio%20I)
+- Elaborei um sistema de repositório que armazena, por meio de um mapeamento chave-valor, os membros de uma instituição de ensino (aluno, professor e disciplina);
+- O projeto foi desenvolvido individualmente;
+- As principais dificuldades encontradas consistiam na estrutura de mapa, como utilizá-la; a ideia do repositório apresentada em sala; algumas consideráveis dificuldades no retorno das chaves e valores do mapa; a utlização da herança nas classes Aluno, Professor e Disciplina; além disso, a parte de front-end do controller ficou muito massiva, verbosa e redundante, busquei minimizá-la;
+- Levei cerca de 5 horas para desenvolver o projeto;
