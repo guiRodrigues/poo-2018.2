@@ -1,0 +1,13 @@
+comandoFalso
+addUser Guilherme qwe123
+addUser Penguin rty456
+showUsers
+logout
+login Penguin 8787
+login Penguin rty456
+logout
+changePass rty456 abc123
+login Penguin rty456
+changePass rty456 abc123
+logout
+end
