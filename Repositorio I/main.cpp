@@ -62,6 +62,7 @@ struct Repositorio{
     // Remove
     void remove(K key){
         if (exists(key))
+            // Usar a chave aqui vai percorrer novamente a estrutura, seria mais inteligente usar o iterator 
             repositorio.erase(key);
         else
             throw "FAIL: Nao encontrado";
