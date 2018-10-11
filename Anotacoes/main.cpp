@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 class Note{
@@ -11,6 +12,9 @@ public:
     {}
     // Getters
     string getTitle(){ return this->title; }
+    bool operator==(Note other){
+        return title == other.title;
+    }
     // toString()
     friend ostream& operator<<(ostream& os, Note note);
 };
@@ -29,15 +33,17 @@ public:
     {}
     // Getters
     string getUsername(){ return this->username; }
+    // Setters
+    void setPassword(string password){ this->password = password; }
     // Por que o verificar senha deve estar no usuário? é papel dele? mas só "ele" deve ter acesso
     bool validatePass(string pass){
         return this->password == pass;
     }
 
     void changePass(string oldPass, string newPass){
-        if (oldPass != this->password)
+        if (validatePass(oldPass) == false)
             throw "Fail: Senha inválida";
-        password = newPass;
+        setPassword(password);
     }
 
     void addNote(string title, string body){
@@ -52,16 +58,16 @@ public:
         // if (it != users.end()) // Diferente do abismo!
         //     return *it;
 
-        #if 0
-        auto it = find(notes.begin(), notes.end(), Note(title));
+        auto it = find_if(notes.begin(), notes.end(), [title](auto note){return note.getTitle() == title;});
         if (it == notes.end())
             throw "Fail: Nota não encontrada";
         notes.erase(it);
-        #endif
         // Como buscar um objeto pelo find???????????
-        for (size_t i=0; i<notes.size(); i++)
-            if (notes[i].getTitle() == title)
+        /* for (size_t i=0; i<notes.size(); i++)
+            if (notes[i].getTitle() == title){
                 notes.erase(notes.begin() + i);
+                break;
+            } */
     }
 
     string showNotes(){
@@ -155,12 +161,12 @@ public:
 class Controller{
     System system;
     LoginManeger loginManeger;
-    User * current;
 public:
 
     Controller():
-    loginManeger(&system)
-    { current = nullptr; }
+    loginManeger(&system){
+
+    }
 
     string frontEnd(string line){
         stringstream in(line), out;
@@ -183,28 +189,28 @@ public:
         else if (op == "showUsers"){
             out << system.getUsers().str();
         }
-        else if (op == "changePass" || op == "addNote" || op == "rmNote" || op == "shoNotes"){
+        else if (op == "changePass" || op == "addNote" || op == "rmNote" || op == "shoNotes" || op == "showNotes"){
             if (loginManeger.isLogged()){
                 if (op == "changePass"){
                     if (loginManeger.isLogged()){
                         string oldPass, newPass;
                         in >> oldPass >> newPass;
-                        current->changePass(oldPass, newPass);
+                        loginManeger.getCurrent().changePass(oldPass, newPass);
                     }
                 }
                 else if (op == "addNote"){
                     string title, body;
                     in >> title;
                     getline(in, body);
-                    current->addNote(title, body);
+                    loginManeger.getCurrent().addNote(title, body);
                 }
                 else if (op == "rmNote"){
                     string title;
                     in >> title;
-                    current->removeNote(title);
+                    loginManeger.getCurrent().removeNote(title);
                 }
                 else if (op == "showNotes"){
-                    out << current->showNotes();
+                    out << loginManeger.getCurrent().showNotes();
                 }
             } else {
                 throw "Fail: Ninguém logado";

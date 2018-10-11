@@ -8,6 +8,7 @@ login Penguin rty456
 logout
 changePass rty456 abc123
 login Penguin rty456
-changePass rty456 abc123
+addNote Segredo É muito secreto
+showNotes
 logout
 end
