@@ -53,3 +53,9 @@ Repositório destinado às atividades da disciplina de POO
 - O projeto foi desenvolvido individualmente;
 - As principais dificuldades encontradas consistiam na estrutura de mapa, como utilizá-la; a ideia do repositório apresentada em sala; algumas consideráveis dificuldades no retorno das chaves e valores do mapa; a utlização da herança nas classes Aluno, Professor e Disciplina; além disso, a parte de front-end do controller ficou muito massiva, verbosa e redundante, busquei minimizá-la;
 - Levei cerca de 5 horas para desenvolver o projeto;
+
+## [Servicço de Anotações](https://github.com/guiRodrigues/poo-2018.2/tree/master/Anotacoes)
+- Elaborei um sistema que gerencia anotações de diversos usuários.
+- O projeto foi desenvolvido individualmente;
+- Mesmo me baseando no exercício feito em sala (Serviço de Segredos), tive algumas dificuldades, por exemplo, a modularização do problema, separar ele no gerenciador de login, as classes "principais" (User e Note), a classe System e o Controller; Tive bastante dificuldade em utilizar algumas funções, como o find, para buscar no vector um objeto com determinados atributos; Além disso, as recorrentes dificuldades na utilzação de ponteiros, referências, iteradores, etc.
+- Levei cerca de 5 horas para desenvolver o projeto;
