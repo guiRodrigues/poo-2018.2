@@ -5,10 +5,18 @@ showUsers
 logout
 login Penguin 8787
 login Penguin rty456
-logout
 changePass rty456 abc123
+logout
 login Penguin rty456
 addNote Segredo É muito secreto
 showNotes
 logout
+login Guilherme qwe123
+addNote Nota anotada em notas
+addNote Nota2 anotada em notas2
+logout
+login Guilherme qwe123
+showNotes
+rmNote Nota2
+showNotes
 end

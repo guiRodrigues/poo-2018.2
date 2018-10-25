@@ -1,0 +1,20 @@
+addProf david C
+addProf elvis D
+addSta gilmario 3
+addTer helder 40 sim
+show david
+show gilmario
+show helder
+show pinoquio
+rm elvis
+rm batman
+addDiaria david
+addDiaria david
+addDiaria david
+show david
+addDiaria gilmario
+show gilmario
+addDiaria helder
+setBonus 600
+show gilmario
+end

@@ -20,7 +20,7 @@ public:
 };
 
 ostream& operator<<(ostream& os, Note note){
-    os << note.title << "; " << note.body;
+    os << note.title << "; " << note.body << "\n";
     return os;
 }
 
