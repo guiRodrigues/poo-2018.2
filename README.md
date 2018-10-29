@@ -63,4 +63,5 @@ Repositório destinado às atividades da disciplina de POO
 ## [Cálculo de salário](https://github.com/guiRodrigues/poo-2018.2/blob/master/Salario/main.cpp)
 - Como requisitado, elaborei um sistema que gerencia a distribuição salarial dos funcionários de uma instiruição de ensino;
 - O projeto foi desenvolvido individualmente;
-- Tive algumas dificuldades em abstrair o contexto do exercício e transpilar essa abstração para código; A utilização do enum para facilitar a atribuição salarial; Algumas redundâncias como na implementação do método toString() nas classes filhas; Algumas dúvidas na implementação
+- Tive algumas dificuldades em abstrair o contexto do exercício e transpilar essa abstração para código; A utilização do enum para facilitar a atribuição salarial; Algumas redundâncias como na implementação do método toString() nas classes filhas; Algumas dúvidas na implementação do repositório, mas reassistir algumas aulas anteriores foi suficiente para sanar as dúvidas; Fora isso, alguns problemas pontuais relacionados à lógica;
+- Levei cerca de 4 horas para desenvolver o projeto;
