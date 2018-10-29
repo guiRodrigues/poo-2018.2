@@ -4,8 +4,6 @@
 #include <algorithm>
 using namespace std;
 
-
-
 class Funcionario{
     string name, description;
     int diarias{0}, maxDiarias;
@@ -24,7 +22,7 @@ public:
     int getMaxDiarias(){ return this->maxDiarias; }
 
     // Setters
-    void setSalario(float salario){ this->salario = salario + this->bonus; }
+    void setSalario(float salario){ this->salario = salario; }
     void setDiarias(int diarias){ this->diarias = diarias; }
     void setBonus(float bonus){ this->bonus = bonus; }
 
@@ -156,15 +154,12 @@ struct Repositorio{
 
     void bonus(float value){
         float individualValue = value/repositorio.size();
-        cout << value << " - " << repositorio.size() << " - " << individualValue << endl;
         for (auto& fun : repositorio){
-            cout << fun.second->getSalario() << " § " << fun.second->getBonus() << endl;
             fun.second->setSalario(fun.second->getSalario() - fun.second->getBonus());
         }
         for (auto& fun : repositorio){
             fun.second->setBonus(individualValue);
             fun.second->setSalario(fun.second->getSalario() + fun.second->getBonus());
-            cout << fun.second->toString() << endl;
         }
     }
 };

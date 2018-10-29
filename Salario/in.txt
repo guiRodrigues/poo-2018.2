@@ -16,5 +16,15 @@ addDiaria gilmario
 show gilmario
 addDiaria helder
 setBonus 600
+show david
 show gilmario
+show helder
+setBonus 300
+show david
+show gilmario
+show helder
+setBonus 900
+show david
+show gilmario
+show helder
 end
