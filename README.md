@@ -59,3 +59,8 @@ Repositório destinado às atividades da disciplina de POO
 - O projeto foi desenvolvido individualmente;
 - Mesmo me baseando no exercício feito em sala (Serviço de Segredos), tive algumas dificuldades, por exemplo, a modularização do problema, separar ele no gerenciador de login, as classes "principais" (User e Note), a classe System e o Controller; Tive bastante dificuldade em utilizar algumas funções, como o find, para buscar no vector um objeto com determinados atributos; Além disso, as recorrentes dificuldades na utilzação de ponteiros, referências, iteradores, etc.
 - Levei cerca de 5 horas para desenvolver o projeto;
+
+## [Cálculo de salário](https://github.com/guiRodrigues/poo-2018.2/blob/master/Salario/main.cpp)
+- Como requisitado, elaborei um sistema que gerencia a distribuição salarial dos funcionários de uma instiruição de ensino;
+- O projeto foi desenvolvido individualmente;
+- Tive algumas dificuldades em abstrair o contexto do exercício e transpilar essa abstração para código; A utilização do enum para facilitar a atribuição salarial; Algumas redundâncias como na implementação do método toString() nas classes filhas; Algumas dúvidas na implementação
