@@ -46,7 +46,7 @@ struct Repositorio{
     #if 0
         CRUD
         ~ Create
-        ~ Remove
+        ~ Read
         ~ Update
         ~ Delete
     #endif
