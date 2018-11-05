@@ -230,7 +230,13 @@ public:
             if (line == "end")
                 return;
             cout << "$ " << line << endl;
-            cout << frontEnd(line) << endl;
+            try{
+                cout << frontEnd(line) << endl;
+            } catch (string e){
+                cout << e << endl;
+            } catch (const char * e){
+                cout << e << endl;
+            }
         }
     }
 };

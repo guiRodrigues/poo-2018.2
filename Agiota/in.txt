@@ -1,4 +1,5 @@
 init 500
+help
 addCli maria maria silva
 addCli josue josue matos
 addCli maria ana maria silva
