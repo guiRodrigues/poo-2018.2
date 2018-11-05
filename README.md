@@ -54,6 +54,12 @@ Repositório destinado às atividades da disciplina de POO
 - As principais dificuldades encontradas consistiam na estrutura de mapa, como utilizá-la; a ideia do repositório apresentada em sala; algumas consideráveis dificuldades no retorno das chaves e valores do mapa; a utlização da herança nas classes Aluno, Professor e Disciplina; além disso, a parte de front-end do controller ficou muito massiva, verbosa e redundante, busquei minimizá-la;
 - Levei cerca de 5 horas para desenvolver o projeto;
 
+## [Agiota Refatorado](https://github.com/guiRodrigues/poo-2018.2/blob/master/Agiota/main.cpp)
+- Como proposto, desenvolvi um sistema que auxilia os negócios de um agiota;
+- O projeto foi desenvolvido individualmente;
+- As principais dificuldades apresentadas nesse projeto foram: atribuir a ideia do repositório na lógica do exercício do agiota; Relacionar as entidades (Cliente, Agiota, Transações) num Sistema; As recorrentes dúvidas na utilização de ponteiros e referências; Algumas dúvidas pontuais na utilização do mapa, mas algumas pesquisas foram suficientes para entender;
+- Levei entre 4 horas para o escopo incial e mais algumas outras para as recorrentes refatorações; 
+
 ## [Serviço de Anotações](https://github.com/guiRodrigues/poo-2018.2/tree/master/Anotacoes)
 - Elaborei um sistema que gerencia anotações de diversos usuários.
 - O projeto foi desenvolvido individualmente;
