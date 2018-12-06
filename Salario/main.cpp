@@ -88,7 +88,7 @@ public:
         salario = 3000 + 300 * level + 100 * diarias + bonus;
     }
 
-    virtual string toString(){
+    string toString(){
         return profissao + " " + name + " nivel " + to_string(level) + "\nsalário: R$" + to_string(salario);
     }
 };
@@ -110,7 +110,7 @@ public:
         salario = (insalubre == "sim") ? (4 * hours + bonus) : (4 * hours + 500 + bonus);
     }
 
-    virtual string toString(){
+    string toString(){
         string ambiente = (insalubre == "sim") ? "não insalubre" : "insalubre";
         return profissao + " " + name + " " + to_string(hours) + "hrs, " + ambiente + "\nsalario R$" + to_string(salario);
     }
