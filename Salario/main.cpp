@@ -66,7 +66,7 @@ public:
         salario += 100 * diarias + bonus;
     }
     
-    virtual string toString(){
+    string toString(){
         return profissao + name + ", classe: " + classe + "\nsalario: R$" + to_string(salario);
     }
 };
