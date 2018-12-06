@@ -6,7 +6,7 @@ using namespace std;
 
 class Funcionario{
 protected:
-    string name;
+    string name, profissao;
     int diarias{0}, maxDiaria;
     float salario, bonus{0};
 public:
@@ -16,10 +16,11 @@ public:
 
     // Getters
     virtual string getName() = 0;
+    virtual string getProfiss() = 0;
     virtual float getSalario() = 0;
     virtual float getBonus() = 0;
     virtual int getDiarias() = 0;
-    virtual int getMaxDiariaa() = 0;
+    virtual int getMaxDiaria() = 0;
 
     virtual void calcSalario() = 0;
 
@@ -44,9 +45,11 @@ public:
         Funcionario(name), classe(classe)
     {}
 
-    virtual string getName(){return name;} 
-    virtual string getProfiss(){return profissao;}
-    virtual int getDiaria(){return diarias;}
+    virtual float getBonus(){return bonus;}
+    virtual float getSalario(){return salario;}
+    virtual string getName(){return name;}
+    virtual string getProfiss(){return profissao;} 
+    virtual int getDiarias(){return diarias;}
     virtual int getMaxDiaria(){return maxDiaria;}
 
     void calcSalario(){
@@ -79,9 +82,11 @@ public:
         Funcionario(name), level(level)
     {}
 
+    virtual float getSalario(){return salario;}
     virtual string getName(){return name;} 
+    virtual float getBonus(){return bonus;}
     virtual string getProfiss(){return profissao;}
-    virtual int getDiaria(){return diarias;}
+    virtual int getDiarias(){return diarias;}
     virtual int getMaxDiaria(){return maxDiaria;}
 
     void calcSalario(){
@@ -101,9 +106,11 @@ public:
     Funcionario(name), hours(hours), insalubre(insalubre)
     {}
 
-    virtual string getName(){return name;} 
+    virtual float getSalario(){return salario;}
+    virtual string getName(){return name;}
+    virtual float getBonus(){return bonus;}
     virtual string getProfiss(){return profissao;}
-    virtual int getDiaria(){return diarias;}
+    virtual int getDiarias(){return diarias;}
     virtual int getMaxDiaria(){return maxDiaria;}
 
     void calcSalario(){
@@ -121,7 +128,7 @@ class Repositorio{
     map<string, T*> data;
 public:
     bool exists(string k){
-        return data.find(key) != data.end();
+        return data.find(k) != data.end();
     }
     bool addUser(string k, T* v){
         if (!exists(k)){
@@ -149,9 +156,9 @@ public:
     void addDiaria(string k){
         auto user = getUser(k);
         // Conversão de tipos
-        if (dynamic_cast<Terceirizado*>(user)) // se eu conseguir converter ele para terceirizado?
+        if (dynamic_cast<Terceirzado*>(user)) // se eu conseguir converter ele para terceirizado?
             throw "fail: Ter nao pode receber diarias";
-        else if (user->getMaxDiaria() >= user->getDiaria())
+        else if (user->getMaxDiaria() >= user->getDiarias())
             user->addDiaria();
         else
             throw "fail: limite de diarias atingido";
@@ -201,7 +208,7 @@ public:
                 string name, salub;
                 int hours_work;
                 in >> name >> hours_work >> salub;
-                Terceirzado* T = new Terceirizado(name, hours_work, salub);
+                Terceirzado* T = new Terceirzado(name, hours_work, salub);
                 if(!repositorio.addUser(name, T))
                     delete T;
                 out << "done";

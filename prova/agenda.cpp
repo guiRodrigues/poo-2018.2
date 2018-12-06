@@ -1,9 +1,25 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 #include <map>
 
 using namespace std;
+
+// Dúvidas:
+// sobrecarga de operador
+// uso de função lambda
+
+class Entry{
+    bool favorite {false};
+public:
+    Entry(){}
+    virtual ~Entry(){}
+    virtual string getId() = 0;
+    virtual void setFavorited(bool value) = 0;
+    virtual bool isFavorited(){}
+    virtual string toString(){}
+};
 
 class Fone {
 public:
@@ -28,10 +44,9 @@ public:
     }
 };
 
-class Contato {
+class Contato : public Entry{
     string name;
     vector<Fone> fones;
-    bool favorite {false};
 public:
     Contato(string name = ""){
         this->name = name;
@@ -73,24 +88,37 @@ public:
 };
 
 class Agenda {
-    map<string, Contato> contatos;
-    map<string, Contato*> favoritos;
+    map<string, Entry*> entradas;
+    map<string, Entry*> entradasFavoritas;
 
 public:
+
+    #if 0
+        void addEntry(Entry * entry)
+        void rmEntry(string id)
+        void favorite(string idEntry)
+        void unfavorite(string idEntry)
+        vector<Entry*> getFavorited()
+        Entry * getEntry(string id)
+        vector<Entry*> getEntries()
+        vector<Entry*> search(string pattern)
+        string toString()
+    #endif
+
     void addContato(Contato cont){
         string name = cont.getName();
-        if(contatos.count(name) == 1){
-            auto contato = getContato(name);
-            for (auto fone : cont.getFones()){
-                // auto f = find(contato->getFones(), contato->getFones()+contato->getFones().size(), fone);
-                auto it = std::find_if(contato->getFones().begin(), contato->getFones().end(), [fone](Fone f){ return fone.id==f.id && fone.number==f.number; });
-                if (it == contato->getFones().end())
-                    cout << ".\n";
-                contato->addFone(fone);
-            }
-        }
+        // if(contatos.count(name) == 1){
+        //     auto contato = getContato(name);
+        //     for (auto fone : cont.getFones()){
+        //         // auto f = find(contato->getFones(), contato->getFones()+contato->getFones().size(), fone);
+        //         // auto it = std::find_if(contato->getFones().begin(), contato->getFones().end(), [fone](Fone f){ return fone.id==f.id && fone.number==f.number; });
+        //         if (it == contato->getFones().end())
+        //             cout << ".\n";
+        //         contato->addFone(fone);
+        //     }
+        // }
             // throw string("contato " + name + " ja existe");
-        contatos[name] = cont;
+        // contatos[name] = cont;
     }
 
     void addFavorite(Contato* contato){
@@ -102,6 +130,8 @@ public:
     }
 
     void rmContato(string name) {
+        //remover do mapa dos favoritos - deletar e remover as referencias
+        // favoritos.erase(name);
         contatos.erase(name);
     }
 
@@ -128,9 +158,8 @@ public:
 
     vector<Contato> getFavorites(){
         vector<Contato> favorites;
-        for (auto& par : contatos)
-            if (par.second.isFavorite())
-                favorites.push_back(par.second);
+        for (auto& favorito : favorites) // Usar os favoritos
+                favorites.push_back(favorito);
         return favorites;
     }
 

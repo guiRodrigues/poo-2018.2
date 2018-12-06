@@ -21,7 +21,7 @@ agenda
 favorited
 rmContato zac
 favorited
-unfav ana
+rmContato ana
 favorited
 agenda
 end
