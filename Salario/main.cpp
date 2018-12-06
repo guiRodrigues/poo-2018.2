@@ -5,26 +5,29 @@
 using namespace std;
 
 class Funcionario{
-    string name, description;
-    int diarias{0}, maxDiarias;
+protected:
+    string name;
+    int diarias{0}, maxDiaria;
     float salario, bonus{0};
 public:
-    Funcionario(string name = "", string description = "", int maxDiarias = 0):
-    name(name), description(description), maxDiarias(maxDiarias)
+    Funcionario(string name = ""):
+        name(name)
     {}
 
     // Getters
-    string getName(){ return this->name; }
-    string getDescription(){ return this->description; }
-    float getSalario(){ return this->salario; }
-    float getBonus(){ return this->bonus; }
-    int getDiarias(){ return this->diarias; }
-    int getMaxDiarias(){ return this->maxDiarias; }
+    virtual string getName() = 0;
+    virtual float getSalario() = 0;
+    virtual float getBonus() = 0;
+    virtual int getDiarias() = 0;
+    virtual int getMaxDiariaa() = 0;
+
+    virtual void calcSalario() = 0;
 
     // Setters
-    void setSalario(float salario){ this->salario = salario; }
-    void setDiarias(int diarias){ this->diarias = diarias; }
+    // void setSalario(float salario){ this->salario = salario; }
+    // void setDiarias(int diarias){ this->diarias = diarias; }
     void setBonus(float bonus){ this->bonus = bonus; }
+    virtual void addDiaria(){this->diarias += 1;}
 
     // Others Methods
     virtual string toString() = 0; // Método abstrato
@@ -33,12 +36,20 @@ public:
 // enum sal {A = 3000, B = 5000, C = 7000, D = 9000, E = 11000};
 
 class Professor : public Funcionario{
+    string profissao{"Prof"};
+    int maxDiaria {2};
     char classe;
 public:
     Professor(string name = "", char classe = '*'):
-    Funcionario(name, "Prof", 2), classe(classe)
-    {
-        // Idiotice?
+        Funcionario(name), classe(classe)
+    {}
+
+    virtual string getName(){return name;} 
+    virtual string getProfiss(){return profissao;}
+    virtual int getDiaria(){return diarias;}
+    virtual int getMaxDiaria(){return maxDiaria;}
+
+    void calcSalario(){
         int sal = 0;
         switch(classe){
             case 'A':
@@ -52,163 +63,179 @@ public:
             case 'E':
                 sal = 11000; break;
         }
-        Funcionario::setSalario(sal);
+        salario += 100 * diarias + bonus;
     }
     
-    virtual string toString(){
-        return Funcionario::getDescription() + " " + Funcionario::getName() + ", classe: " + classe + "\nsalario: R$" + to_string(Funcionario::getSalario());
+    string toString(){
+        return profissao + name + ", classe: " + classe + "\nsalario: R$" + to_string(salario);
     }
 };
 
 class Servidor : public Funcionario{
-    int level;
+    string profissao {"Sta"};
+    int maxDiaria{1}, level;
 public:
     Servidor(string name = "", int level = 0):
-    Funcionario(name, "Sta", 1), level(level)
-    {
-        Funcionario::setSalario(3000 + 300*level);
+        Funcionario(name), level(level)
+    {}
+
+    virtual string getName(){return name;} 
+    virtual string getProfiss(){return profissao;}
+    virtual int getDiaria(){return diarias;}
+    virtual int getMaxDiaria(){return maxDiaria;}
+
+    void calcSalario(){
+        salario = 3000 + 300 * level + 100 * diarias + bonus;
     }
 
     virtual string toString(){
-        return Funcionario::getDescription() + " " + Funcionario::getName() + " nivel " + to_string(level) + "\nsalário: R$" + to_string(Funcionario::getSalario());
+        return profissao + " " + name + " nivel " + to_string(level) + "\nsalário: R$" + to_string(salario);
     }
 };
 
 class Terceirzado : public Funcionario{
-    int hours;
-    string insalubre;
+    int maxDiaria{-1}, hours; //?-1
+    string profissao{"Ter"}, insalubre;
 public:
     Terceirzado(string name = "", int hours = 0, string insalubre = ""):
-    Funcionario(name, "Ter"), hours(hours), insalubre(insalubre)
-    {
-        float sal = (insalubre == "sim") ? (4 * hours) : (4 * hours + 500);
-        Funcionario::setSalario(sal);
+    Funcionario(name), hours(hours), insalubre(insalubre)
+    {}
+
+    virtual string getName(){return name;} 
+    virtual string getProfiss(){return profissao;}
+    virtual int getDiaria(){return diarias;}
+    virtual int getMaxDiaria(){return maxDiaria;}
+
+    void calcSalario(){
+        salario = (insalubre == "sim") ? (4 * hours + bonus) : (4 * hours + 500 + bonus);
     }
 
     virtual string toString(){
         string ambiente = (insalubre == "sim") ? "não insalubre" : "insalubre";
-        return Funcionario::getDescription() + " " + Funcionario::getName() + " " + to_string(hours) + "hrs, " + ambiente + "\nsalario R$" + to_string(Funcionario::getSalario());
+        return profissao + " " + name + " " + to_string(hours) + "hrs, " + ambiente + "\nsalario R$" + to_string(salario);
     }
 };
 
-struct Repositorio{
-    map<string, Funcionario*> repositorio;
-
-    // isso vai percorrer apenas uma vez?
-    void add(string key, Funcionario* fun){
-        // auto iterador = it(key);
-
-        auto it = repositorio.find(key);
-        if (it != repositorio.end())
-            throw "Fail: A chave \"" + key + "\" já está cadastrada";
-        repositorio[key] = fun;
+template<typename T>
+class Repositorio{
+    map<string, T*> data;
+public:
+    bool exists(string k){
+        return data.find(key) != data.end();
     }
-
-    // Como retornar o iterador?
-    // map<string, Funcionario*>::iterator& it(string key){
-    //     auto it = repositorio.find(key);
-    //     if (it == repositorio.end())
-    //         throw "FAIL"; // qual tipo de erro?
-    //     return it;
-    // }
-
-    // Funcionario& get(string key){
-    //     // Como retornar o usuário assim?
-    //     // auto it = repositorio.find(key);
-    //     // if (it == repositorio.end())
-    //     //     throw "Fail: Chave \"" + key + "\" não encontrada";
-        
-    //     for (auto& fun : repositorio){
-    //         if (fun.first == key)
-    //             return fun;
-    //     }
-    // }
-
-    string showFun(string key){
-        auto it = repositorio.find(key);
-        if (it == repositorio.end())
-            throw "Fail: Funcionário \"" + key + "\" não encontrado";
-        return it->second->toString();
-    }
-
-    string remove(string key){
-        auto it = repositorio.find(key);
-        if (it == repositorio.end())
-            throw "Fail: Funcionário \"" + key + "\" não encontrado";
-        string str = it->second->getDescription() + " " + it->second->getName() + " removido";
-        repositorio.erase(key);
-        return str;
-    }
-
-    void addDiaria(string key){
-        auto it = repositorio.find(key);
-        if (it == repositorio.end())
-            throw "Fail: Funcionário \"" + key + "\" não encontrado";
-        if (it->second->getDescription() == "Ter")
-            throw (string) + "Ter nao pode receber diaria";
-        if (it->second->getDiarias() == it->second->getMaxDiarias())
-            throw (string) + "Fail: Limite de diarias atingido";
-        it->second->setDiarias(it->second->getDiarias() + 1);
-        it->second->setSalario(it->second->getSalario() + 100);
-    }
-
-    void bonus(float value){
-        float individualValue = value/repositorio.size();
-        for (auto& fun : repositorio){
-            fun.second->setSalario(fun.second->getSalario() - fun.second->getBonus());
+    bool addUser(string k, T* v){
+        if (!exists(k)){
+            data[k] = v;
+            return true;
         }
-        for (auto& fun : repositorio){
-            fun.second->setBonus(individualValue);
-            fun.second->setSalario(fun.second->getSalario() + fun.second->getBonus());
+        else
+            throw "fail: usuario ja cadastrado";
+    }
+    void rmUser(string k){
+        auto user = getUser(k);
+        data.erase(k);
+        cout << "  " + user->getProfiss() + " " + user->getName() + " foi removido!";
+        delete user;
+    }
+    T* getUser(string k){
+        auto it = data.find(k);
+        if (it != data.end())
+            return it->second;
+        throw "fail: funcionario " + k + " nao existe";
+    }
+    void refreshSalario(T* t){
+        t->calcSalario();           
+    }
+    void addDiaria(string k){
+        auto user = getUser(k);
+        // Conversão de tipos
+        if (dynamic_cast<Terceirizado*>(user)) // se eu conseguir converter ele para terceirizado?
+            throw "fail: Ter nao pode receber diarias";
+        else if (user->getMaxDiaria() >= user->getDiaria())
+            user->addDiaria();
+        else
+            throw "fail: limite de diarias atingido";
+    }
+    void setBonus(int bonus){
+        bonus = bonus / data.size();
+        for(auto& pair : data){
+            pair.second->setBonus(bonus);
         }
+    }
+    string toString(){
+        stringstream ss;
+        for(auto pair : data)
+            ss << pair.second->toString()
+               << endl << "  ";
+        return ss.str();
     }
 };
 
 class Controller{
-    Repositorio repositorio;
+    Repositorio<Funcionario> repositorio;
 public:
     string frontEnd(string line){
         stringstream in(line), out;
         string op;
         in >> op;
-        if (op == "addProf" || op == "addSta" || op == "addTer"){
-            string name;
-            in >> name;
-            if (op == "addProf"){
-                char classe;
-                in >> classe;
-                repositorio.add(name, new Professor(name, classe));
-            } else if (op == "addSta"){
-                int level;
-                in >> level;
-                repositorio.add(name, new Servidor(name, level));
-            } else if (op == "addTer"){
-                int hours;
-                string insalubre;
-                in >> hours >> insalubre;
-                repositorio.add(name, new Terceirzado(name, hours, insalubre.substr(1)));
+        try {
+            if(op == "addProf"){
+                string name;
+                char level;
+                in >> name >> level;
+                Professor* P = new Professor(name, level);
+                if(!repositorio.addUser(name, P))
+                    delete P;
+                out << "done";
             }
-        } 
-        else if (op == "show"){
-            string key;
-            in >> key;
-            out << repositorio.showFun(key);
+            else if(op == "addSta"){
+                string name;
+                int level;
+                in >> name >> level;
+                Servidor* S = new Servidor(name, level);
+                if(!repositorio.addUser(name, S))
+                    delete S;
+                out << "done";
+            }
+            else if(op == "addTer"){
+                string name, salub;
+                int hours_work;
+                in >> name >> hours_work >> salub;
+                Terceirzado* T = new Terceirizado(name, hours_work, salub);
+                if(!repositorio.addUser(name, T))
+                    delete T;
+                out << "done";
+            }
+            else if(op == "rm"){
+                string name;
+                in >> name;
+                repositorio.rmUser(name);
+            }
+            else if(op == "show"){
+                if(in >> op){
+                    Funcionario* f = repositorio.getUser(op);
+                    repositorio.refreshSalario(f);
+                    out << repositorio.getUser(op)->toString();
+                } else
+                    out << repositorio.toString();
+            }
+            else if(op == "addDiaria"){
+                string name;
+                in >> name;
+                repositorio.addDiaria(name);
+                out << "done";
+            }
+            else if(op == "setBonus"){
+                int bonus;
+                in >> bonus;
+                repositorio.setBonus(bonus);
+                out << "done";
+            }
         }
-        else if (op == "rm"){
-            string key;
-            in >> key;
-            out << repositorio.remove(key);
-        }
-        else if (op == "addDiaria"){
-            string key;
-            in >> key;
-            repositorio.addDiaria(key);
-        }
-        else if (op == "setBonus"){
-            float value;
-            in >> value;
-            repositorio.bonus(value);
-        }
+        catch(const char* e){ out << e; }
+        catch(string e){ out << e; }
+        catch(...){out << "fail: ocorreu uma exceção";}
+
         return out.str();
     }
 

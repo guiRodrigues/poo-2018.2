@@ -3,6 +3,26 @@
         "iostream": "cpp",
         "vector": "cpp",
         "deque": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "__debug": "cpp",
+        "__locale": "cpp",
+        "__tree": "cpp",
+        "algorithm": "cpp",
+        "atomic": "cpp",
+        "cstddef": "cpp",
+        "functional": "cpp",
+        "initializer_list": "cpp",
+        "ios": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "iterator": "cpp",
+        "locale": "cpp",
+        "memory": "cpp",
+        "ostream": "cpp",
+        "sstream": "cpp",
+        "streambuf": "cpp",
+        "string": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp"
     }
 }
